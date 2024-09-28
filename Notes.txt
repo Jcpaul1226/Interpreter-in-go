@@ -1,0 +1,20 @@
+One fundamental attribute of interepreters is that they take source coude and evaluate it without producing some visible, intermediate results that can later be executed.
+Compilers take source code and produce output in another language that the underlying system can understand
+Some compilers are tiny and dont even parse
+some are more advanced and also compile it into an internal representation called bytecode and evaluate that
+More advanced, JIT interepreters compile the input just-in-time into native machine code that gets executed
+
+**This interepreter will parse the source code, build an abstract syntax tree(AST) and then evaluate the tree
+
+WE WILL BUILD: lexer, parser, tree representation, and evaluator.
+
+WE WILL LEARN: What "tokens" do, what an AST is and how to build it, how to extend our language with new data structures and functions
+
+Monkey features - C-like syntax, variable bindings, ints and bools, arithmetic expressions, built-in functions, first-class and higher-order functions
+closures, string data structure, array data structure, hash data structure.
+
+steps: tokenize and parse Monkey source code in a REPL -> build an internal representation of the code called AST and then evaluate tree.
+
+Creation List: Lexer -> Parser -> abstract syntax tree (AST) -> Internal object system -> evaluator
+
+**WHY GO - easy to read and understand, universal formatting style thanks to gofmt, and no other tools besides GO needed
