@@ -18,3 +18,51 @@ steps: tokenize and parse Monkey source code in a REPL -> build an internal repr
 Creation List: Lexer -> Parser -> abstract syntax tree (AST) -> Internal object system -> evaluator
 
 **WHY GO - easy to read and understand, universal formatting style thanks to gofmt, and no other tools besides GO needed
+
+CHAPTER 1: LEXING
+    Lexical analysis:
+Source code -> Tokens -> abstract syntax tree
+Source to tokens is called lexical analysis or lexing
+Called a lexer or tokenizer or scanner
+Tokens - small, easy categorizable data structures that are then fed to the parser
+White space will not show up as a token, but some languages like python they are significant
+
+    Defining our tokens:
+numbers like 5 or 10 will be integers, variable names will be identifiers, and words like variables but not identifiers will be keywords
+
+Package token
+type TokenType string
+type Token struct {
+    Type TokenType      //distinguish between types like "integer" or "right bracket"
+    Literal String      //Holds value of the token
+}
+
+We use string because it allows us to use many different values, easy to debug, and able to print it. int or byte could be more efficient but not necessary
+TWO SPECIAL TYPES:
+ILLEGAL- token/character that we dont know about
+EOF- end of file, tells our parser to stop
+
+    The Lexer:
+Does not need to buffer or save tokens, since there is only one method NextToken(), which outputs the next token
+two pointers in Lexer struct, position and readPostion
+position - points to the character in the input that corresponds to the ch byte
+readPostion points to the next character in the input
+readChar() - gives us the next character and advances our position in the input
+    First, checks if we have reached the end. if so, set l.ch to 0 which is the ASCII code for "NUL", either means we havent read anything or EOF
+    l.position becomes l.readPostion and l.readPostion is incremented by one
+    only supports ASCII characters instead of full unicode to keep things simple. To fully support unicode and UTF-8 change l.ch from byte to rune.
+NextToken() - look at current character (l.ch) and return a token depending on the character.
+use readChar() to advance our pointer before returning the current token
+newToken() - helps initialize new tokens
+Identifiers and keywords - lexer needs to recognize whether the current character is a letter and if so, read the rest untill it encounters a non - letter to identify if it is an identifier or keywords
+default branch to check for indetifiers when l.ch is not recognized
+ILLEGAL tokens for when we dont know how to handle the current character
+isLetter() - checks whether the given argument is a letter. Allows for things like _ to be included in indentifiers/keywords, such as foo_bar
+
+readIdentifier() - reads in an identifier and advances our lexer's position untill it encounters a non-letter-character
+token literal will be set by readIdentifier() in the default branch
+Create a map of identifiers that will be used as keywords
+LookupIdent() - check if identifier is in keyword table, if so return keywords TokenType constant, if not return token.IDENT which is the TokenType for all user-defined identifiers
+
+
+
