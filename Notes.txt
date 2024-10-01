@@ -54,15 +54,24 @@ readChar() - gives us the next character and advances our position in the input
 NextToken() - look at current character (l.ch) and return a token depending on the character.
 use readChar() to advance our pointer before returning the current token
 newToken() - helps initialize new tokens
+
 Identifiers and keywords - lexer needs to recognize whether the current character is a letter and if so, read the rest untill it encounters a non - letter to identify if it is an identifier or keywords
-default branch to check for indetifiers when l.ch is not recognized
+default branch to check for indentifiers when l.ch is not recognized
 ILLEGAL tokens for when we dont know how to handle the current character
 isLetter() - checks whether the given argument is a letter. Allows for things like _ to be included in indentifiers/keywords, such as foo_bar
-
 readIdentifier() - reads in an identifier and advances our lexer's position untill it encounters a non-letter-character
 token literal will be set by readIdentifier() in the default branch
 Create a map of identifiers that will be used as keywords
 LookupIdent() - check if identifier is in keyword table, if so return keywords TokenType constant, if not return token.IDENT which is the TokenType for all user-defined identifiers
+skipWhitespace() - if there are any characters to skip, such as as ' ' or '\t', call l.readChar() to move pointer to next character
+Some languages create tokens for newline characters, and some throw parsing errors if they are in the incorrect spot.
+readNumber() - reads in a number and advances our lexers position // exactly the same as readIdentifier but it uses isDigit() instead of isLetter()
+isDigit() - returns whether ch is a number between 0 and 9
+
+**The lexer's job is not to tell us if the code makes sense, works or contains errors, it should only turn the input into tokens
+
+Adding [-,!,*,/,<,>] Tokens: Add them to token constants list, and then NextToken() switch case
+Adding [true,false,if,else,return] Tokens: add them to token constants list and the keywords map
 
 
 
