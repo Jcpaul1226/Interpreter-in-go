@@ -1,0 +1,11 @@
+Package groups together code
+use import to access code from different packages
+
+Create a project under the src folder found in C:\Users\Joshua Paul\go
+in the project folder, create a go.mod file to act as a package directory
+EX: For this project the mod is monkey
+The package we want to install is called token so:
+import "monkey/token"
+
+ go build: as a check that the packages can be built (along with their dependencies) 
+ go install: also (permanently) installs the results in the proper folders of your $GOPATH.

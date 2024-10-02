@@ -1,3 +1,4 @@
+***         INTRODUCTION            ***
 One fundamental attribute of interepreters is that they take source coude and evaluate it without producing some visible, intermediate results that can later be executed.
 Compilers take source code and produce output in another language that the underlying system can understand
 Some compilers are tiny and dont even parse
@@ -19,7 +20,7 @@ Creation List: Lexer -> Parser -> abstract syntax tree (AST) -> Internal object 
 
 **WHY GO - easy to read and understand, universal formatting style thanks to gofmt, and no other tools besides GO needed
 
-CHAPTER 1: LEXING
+***         CHAPTER 1: LEXING           ***
     Lexical analysis:
 Source code -> Tokens -> abstract syntax tree
 Source to tokens is called lexical analysis or lexing
@@ -72,6 +73,15 @@ isDigit() - returns whether ch is a number between 0 and 9
 
 Adding [-,!,*,/,<,>] Tokens: Add them to token constants list, and then NextToken() switch case
 Adding [true,false,if,else,return] Tokens: add them to token constants list and the keywords map
+Adding [==,!=] tokens: reuse '=' and '!' branches and extend them by looking at the next character, and also add to consstants list
 
+peekChar() - returns the next char but does not increment l.position    
+When checking for two-character tokens, make sure to save the current char before calling readChar() 
 
+** The difficulty of parsing different languages often comes down to how far you have to look forwards or backwards
+
+START OF A REPL (Read Evaluate Print Loop)
+REPL will read in the tokens and print them out untill the EOF token is produced
+
+***       CHAPTER 2: PARSING        ***
 
