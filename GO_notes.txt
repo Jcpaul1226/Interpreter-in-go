@@ -9,3 +9,5 @@ import "monkey/token"
 
  go build: as a check that the packages can be built (along with their dependencies) 
  go install: also (permanently) installs the results in the proper folders of your $GOPATH.
+
+Byte and string are similar except a string is immutable while a byte can add more bytes at the end up to its capacity
