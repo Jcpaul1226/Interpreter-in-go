@@ -103,3 +103,26 @@ This means we will be starting with the constructing root node, and working our 
 let x = 10;    can be boiled down to let <identifier> = <expression>;
 Expressions produce values.     //the expression 5 has a value of 5
 Statements do not.              //let x = 5; or return 5; do not produce a value
+
+Three interfaces, Node, Statement, and Expression
+Every node in our AST will implement the Node interface, which provides a TokenLiteral() method that returns the literal value of the token it is associated with
+TokenLiteral() - used for debugging
+statementNode and expressionNode are for guiding the Go compiler and throwing errors if a statement is used when an expression should be used and vice versa
+Program node will be the root node for every AST our parser produces
+
+**What does a node for a variable binding need?
+    - It needs one for the name of the variable
+    - a field that points to the expression on the right side of the equal sign // it needs to point to any expression
+    - it needs to keep track of the toke the AST node is associated with
+    - Identifier, expression that produces value in let statement, and token
+
+Parser: l, curToken, and peekToken
+    l - pointer to an instance of the lexer
+    curToken - pointer to our current token         //like position in our lexer
+    peekToken - pointer to the next token           //like readPosition in our lexer
+
+We need to look at the curToken, decide what to do next, and use peekToken if curToken does not give us enough information
+Parser Pseudo - construct root node, build child nodes, the statements, by calling other functions that know which node to construct based on current token
+recursion happens inside parser functions since we dont know what might need to be parsed next
+Ex: for 5+5 we first parse 5 + and then we call parseExpression() again since it could be 5+ 5 *10
+Parser - repeatedly advance the oken, and check the current token to decide what to do next: either call another function or thrown an error
