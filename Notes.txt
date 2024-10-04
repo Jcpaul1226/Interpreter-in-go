@@ -84,4 +84,22 @@ START OF A REPL (Read Evaluate Print Loop)
 REPL will read in the tokens and print them out untill the EOF token is produced
 
 ***       CHAPTER 2: PARSING        ***
+A parser turns its input into a data structure that represents the input
+//Side Note: in Lisp, the data structures used to represent the source code are the ones used by Lisp users. "Code is data, data is code" - commonly said by Lisp programmers
+The process of parsing is also called snytactic analysis
+** Take source code, build data structure, analyze input and check that it conforms to the expected structure while building data structure
 
+** Parser Notes **
+Common Parser Generators: yacc, bison, ANTLR
+ - tools that when fed a formal description of a language, produce parsers
+ Context-free grammar (CFG) - a set of rules that describe how to form correct sentences in a language
+    - Most common CFS's are Backus-Naur Form (BNF) or Extended Backus-Naur Form (EBNF)
+Top down parsing: "recursive descent parsing", "early parsing", or "predictive parsing"
+
+We will be using a recusive descent parser, "top down operator presedence" parser, or "Pratt parser" after Vaughan Pratt
+This means we will be starting with the constructing root node, and working our way down
+
+    Parsing Let Statements:
+let x = 10;    can be boiled down to let <identifier> = <expression>;
+Expressions produce values.     //the expression 5 has a value of 5
+Statements do not.              //let x = 5; or return 5; do not produce a value
