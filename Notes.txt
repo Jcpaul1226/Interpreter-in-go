@@ -126,3 +126,11 @@ Parser Pseudo - construct root node, build child nodes, the statements, by calli
 recursion happens inside parser functions since we dont know what might need to be parsed next
 Ex: for 5+5 we first parse 5 + and then we call parseExpression() again since it could be 5+ 5 *10
 Parser - repeatedly advance the oken, and check the current token to decide what to do next: either call another function or thrown an error
+ParseProgram() - construct root node -> iterate over tokens untill EOF -> add all statements to Statements slice of root node
+parseLetStatement() - construct *ast.LetStatement node with current token, advances token an expects IDENT token, which it constructs and Identifier node
+    then it expects an equal sign and jumps over the expression untill it encounters a semicolon, will be replaced by parsing expressions
+curTokenis(x) - check if current token is x
+peekTokenIs(x) - check if next token is x
+expectPeek() - checks type of peekToken() and if it is correct, advance the token by calling NextToken()
+    - expectPeek() is an "assertion function" most parsers share
+    it enforces the correctness of the order of tokens by checking the next ones type
