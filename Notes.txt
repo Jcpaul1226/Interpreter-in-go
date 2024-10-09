@@ -134,3 +134,14 @@ peekTokenIs(x) - check if next token is x
 expectPeek() - checks type of peekToken() and if it is correct, advance the token by calling NextToken()
     - expectPeek() is an "assertion function" most parsers share
     it enforces the correctness of the order of tokens by checking the next ones type
+Adding Errors checking for debugging:
+    add and error field in the parser, which is a slice of strings
+    peekError() - print out expected token vs recieved token, and add error to errors
+    Errors() - check if parser encountered any errors
+    add peekError() to expectPeek() to add an error every time our token expectation is wrong
+
+***PARSING RETURN STATEMENENTS***
+First step is to define the necessary structures in the ast Package
+return statements consist solely of the keywords return and an expression
+add a case for token.RETURN in our parseStatement() switch case
+parseReturnStatement() - construct an ast.ReturnStatement, with the current token. Skips over ever expression untill a semicolon
