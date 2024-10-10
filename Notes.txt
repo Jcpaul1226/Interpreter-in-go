@@ -145,3 +145,18 @@ First step is to define the necessary structures in the ast Package
 return statements consist solely of the keywords return and an expression
 add a case for token.RETURN in our parseStatement() switch case
 parseReturnStatement() - construct an ast.ReturnStatement, with the current token. Skips over ever expression untill a semicolon
+
+***PARSING EXPRESSIONS***
+Parsing statements are straight forward as we work left to right
+expressions are more difficult as we have operator precedence issues such as 
+    5+ 5*10 or (5+10) * 5
+Cases like this require certain parts of an expression to be deeper into an AST, and evaluated earlier
+Another issues is that the same tokens can be present in multiple positions such as:
+    -5-10 or 5*(add(2,3)+10)
+One set of parenthesis groups an expression while the other is a call expression\
+*The validity of a token's position now depends on the context, tokens before/after, and their precedence
+*Everything except let and return statements are an expression
+EXPRESSIONS - prefix operators, infix operatiors, comparison operators, parentheses, call expressions, identifiers
+Typically parsers use grammar rules (BNF or EBNF) but we will be using single token types
+*Each token type can have two parsing functions associated with it, infix or prefix
+String() - create a buffer, write return value of each statement's String() method, and then returns the buffer as a string
