@@ -160,3 +160,8 @@ EXPRESSIONS - prefix operators, infix operatiors, comparison operators, parenthe
 Typically parsers use grammar rules (BNF or EBNF) but we will be using single token types
 *Each token type can have two parsing functions associated with it, infix or prefix
 String() - create a buffer, write return value of each statement's String() method, and then returns the buffer as a string
+Pratt parser's main idea - association of parsing functions (semantic code) with token types
+Each token type can have up to two parsing functions associated with it, depending on whether its a prefix or infix
+** Both prefixParseFn() and infixParseFn return an ast.Expression, but infixParseFn() also takes an ast.Expression as an argument
+in Parser constants, use iota to give the following constants incrementing numbers as values
+We use the values assigned to each operator to establish an order of operations for our program 

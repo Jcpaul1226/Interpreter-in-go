@@ -46,6 +46,11 @@ type ReturnStatement struct {
 	ReturnValue Expression
 }
 
+// String implements Statement.
+func (rs *ReturnStatement) String() string {
+	panic("unimplemented")
+}
+
 func (rs *ReturnStatement) statementNode()       {}
 func (rs *ReturnStatement) TokenLiteral() string { return rs.Token.Literal }
 
