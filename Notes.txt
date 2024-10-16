@@ -165,3 +165,8 @@ Each token type can have up to two parsing functions associated with it, dependi
 ** Both prefixParseFn() and infixParseFn return an ast.Expression, but infixParseFn() also takes an ast.Expression as an argument
 in Parser constants, use iota to give the following constants incrementing numbers as values
 We use the values assigned to each operator to establish an order of operations for our program 
+parseExpression() - check if we have a parsing function associated with current token in the prefix position, and calls parsing function
+modify the New() function to initizalize the prefixParseFn map on Parser and register a parsing function
+ParseIdentifier() - returns an *ast.Identifier with the current token in the token field and literal value in Value
+Both prefixParseFn and infixParseFn will follow this protocol:
+    start with curToken being the type of token you are associated with, and return curToken being the last of your expression
